@@ -1,0 +1,34 @@
+name: Java Spring Boot CI
+
+on:
+   push:
+     branches:
+       - main
+    
+env:
+  CONTAINER_REGISTRY: ghcr.io
+  CONTAINER_IMAGE: ${{ github.repository }}
+  IMAGE_TAG: ${{ github.run_number }}    
+
+jobs:
+  build:                       #name of the first job
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    
+    - name: Login to Git Hub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.CONTAINER_REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GHCR_TOKEN }}
+
+    - name: Build and push Docker image - Dynamic
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          dockerfile: Dockerfile
+          push: true
+          tags: ${{ env.CONTAINER_REGISTRY }}/${{ env.CONTAINER_IMAGE }}:${{ env.IMAGE_TAG }}
