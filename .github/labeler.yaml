@@ -1,0 +1,6 @@
+Java:
+- src/*.java
+
+CI/CD:
+- .github/*
+- Dockerfile
