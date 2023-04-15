@@ -43,6 +43,5 @@ jobs:
         
     - name: Deploy
       run: |
-        echo ${{ secrets.KUBECONFIG }} | base64 --decode > kubeconfig.yaml
-        export KUBECONFIG=kubeconfig.yaml
+        aws eks update-kubeconfig --name demo-cluster
         kubectl apply -f deployment.yaml
