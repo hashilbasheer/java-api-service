@@ -1,5 +1,3 @@
-Application.java
-
 package com.dockerforjavadevelopers.hello;
 
 
