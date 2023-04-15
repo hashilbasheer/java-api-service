@@ -15,7 +15,7 @@ RUN mvn package
 
 #pull base image
 
-FROM eclipse-temurin:11
+FROM openjdk:11-jdk-slim
 
 
 #expose port 8080
