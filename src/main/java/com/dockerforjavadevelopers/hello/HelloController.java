@@ -11,5 +11,9 @@ public class HelloController {
     public String index() {
         return "Hello World\n";
     }
+    @GetMapping("/name")
+	public String getName() {
+		return "java-api-service !!";
+	}
     
 }
