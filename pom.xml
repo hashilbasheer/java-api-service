@@ -1,84 +1,45 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
-         http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    
-    <groupId>com.example</groupId>
+
+    <groupId>com.dockerforjavadevelopers</groupId>
     <artifactId>hello-world</artifactId>
-    <version>1.0.0</version>
-    
-    <properties>
-        <java.version>11</java.version>
-        <spring-boot.version>2.6.3</spring-boot.version>
-        <maven-compiler-plugin.version>3.9.0</maven-compiler-plugin.version>
-        <dockerfile-maven-plugin.version>1.4.13</dockerfile-maven-plugin.version>
-        <kubernetes-maven-plugin.version>1.2.0</kubernetes-maven-plugin.version>
-    </properties>
-    
+    <version>0.1.0</version>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.6.6</version>
+    </parent>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>${spring-boot.version}</version>
         </dependency>
+
+		<dependency>
+		    <groupId>junit</groupId>
+		    <artifactId>junit</artifactId>
+		    <version>4.13.1</version>
+		    <scope>test</scope>
+		</dependency>
+        
     </dependencies>
-    
+
+    <properties>
+        <start-class>com.dockerforjavadevelopers.hello.Application</start-class>
+		<log4j2.version>2.17.0</log4j2.version>
+    </properties>
+
     <build>
         <plugins>
-            <!-- Compile Java code using Java 11 -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler-plugin.version}</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                </configuration>
-            </plugin>
-            <!-- Build a Docker image of the application -->
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>${dockerfile-maven-plugin.version}</version>
-                <configuration>
-                    <repository>${docker.image.prefix}/${project.artifactId}</repository>
-                    <buildArgs>
-                        <GITHUB_RUN_NUMBER>${env.GITHUB_RUN_NUMBER}</GITHUB_RUN_NUMBER>
-                    </buildArgs>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>default</id>
-                        <goals>
-                            <goal>build</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <!-- Deploy the application to EKS -->
-            <plugin>
-                <groupId>io.fabric8</groupId>
-                <artifactId>kubernetes-maven-plugin</artifactId>
-                <version>${kubernetes-maven-plugin.version}</version>
-                <configuration>
-                    <images>
-                        <image>
-                            <name>${docker.image.prefix}/${project.artifactId}</name>
-                            <build>
-                                <from>${docker.image.prefix}/jdk</from>
-                                <tags>
-                                    <tag>${project.version}</tag>
-                                </tags>
-                            </build>
-                        </image>
-                    </images>
-                    <resourceDir>${project.basedir}/kubernetes</resourceDir>
-                    <namespace>default</namespace>
-                </configuration>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
-    
+
 </project>
