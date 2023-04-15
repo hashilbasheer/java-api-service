@@ -2,6 +2,9 @@
 
 FROM maven:3.8.5-openjdk-11 AS maven_build
 
+ARG GITHUB_RUN_NUMBER
+ENV GITHUB_RUN_NUMBER ${GITHUB_RUN_NUMBER}
+
 COPY pom.xml /tmp/
 
 COPY src /tmp/src/
