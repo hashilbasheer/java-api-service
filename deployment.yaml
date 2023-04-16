@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: api-service
-        image:  ghcr.io/hashilbasheer/java-api-service:41
+        image:  ghcr.io/hashilbasheer/java-api-service:latest
         ports:
         - containerPort: 8080
         imagePullPolicy: Always
