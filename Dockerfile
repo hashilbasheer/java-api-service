@@ -1,4 +1,4 @@
-# Maven build container 
+# Maven build container
 FROM maven:3.8.5-openjdk-11 AS maven_build
 
 ARG GITHUB_RUN_NUMBER=1234
@@ -20,4 +20,4 @@ EXPOSE 8080
 COPY --from=maven_build /tmp/target/hello-world-0.1.0.jar /data/hello-world-0.1.0.jar
 
 #default command
-CMD java -jar /data/hello-world-0.1.0.jar ${GITHUB_RUN_NUMBER}
+CMD java -DGITHUB_RUN_NUMBER=${GITHUB_RUN_NUMBER} -jar /data/hello-world-0.1.0.jar
