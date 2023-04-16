@@ -11,10 +11,10 @@ import com.sun.net.httpserver.HttpServer;
 public class HelloWorld {
     public static void main(String[] args) throws Exception {
         // Read the GITHUB_RUN_NUMBER environment variable
-        String githubRunNumber = System.getenv("GITHUB_RUN_NUMBER");
+        String githubRunNumber = args.length > 0 ? args[0] : "unknown";
 
         // Create a new HTTP server
-        HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
+        HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
 
         // Define a handler for the root path
         server.createContext("/", new HttpHandler() {
