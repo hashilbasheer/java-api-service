@@ -32,7 +32,7 @@ jobs:
         dockerfile: Dockerfile
         push: true
         tags: ${{ env.CONTAINER_REGISTRY }}/${{ env.CONTAINER_IMAGE }}:${{ env.IMAGE_TAG }}
-        build-args: GITHUB_RUN_NUMBER=latest
+        build-args: GITHUB_RUN_NUMBER=${{ github.run_number }}
         
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
