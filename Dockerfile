@@ -4,6 +4,7 @@ FROM maven:3.8.5-openjdk-11 AS maven_build
 ARG GITHUB_RUN_NUMBER=1234
 ENV GITHUB_RUN_NUMBER=${GITHUB_RUN_NUMBER}
 
+RUN sed -i "s/{GITHUB_RUN_NUMBER}/$GITHUB_RUN_NUMBER/g" src/main/java/com/dockerforjavadevelopers/hello/HelloWorld.java 
 COPY pom.xml /tmp/
 COPY src /tmp/src/
 
