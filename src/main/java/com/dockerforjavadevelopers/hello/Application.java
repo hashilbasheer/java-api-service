@@ -2,9 +2,9 @@ package com.dockerforjavadevelopers.hello;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.conext.ApplicationContext;
-import org.springframework.conext.annotation.ComponentScan;
-import org.springframework.conext..annotation.Configuration;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context..annotation.Configuration;
 
 @Configuration
 @EnableAutoConfiguration
